@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>loader</title>
+        <script>
+            function loadFile() {
+                const fileInput = document.getElementById('fileInput');
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const newWindow = window.open('', '_blank');
+                    newWindow.document.write(e.target.result);
+                    newWindow.document.close();
+                };
+
+                reader.onerror = function() {
+                    console.error('Error:', reader.error);
+                };
+
+                reader.readAsText(file);
+            }
+        </script>
+    </head>
+    <body>
+        <input type="file" id="fileInput">
+        <button onclick="loadFile()">Load File</button>
+    </body>
+</html>
